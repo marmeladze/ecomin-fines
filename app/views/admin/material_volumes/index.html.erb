@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Material Volumes</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @material_volumes.each do |material_volume| %>
+      <tr>
+        <td><%= link_to 'Show', material_volume %></td>
+        <td><%= link_to 'Edit', edit_material_volume_path(material_volume) %></td>
+        <td><%= link_to 'Destroy', material_volume, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Material volume', new_material_volume_path %>

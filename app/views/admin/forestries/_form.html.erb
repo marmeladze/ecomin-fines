@@ -1,0 +1,17 @@
+<%= form_for(@forestry) do |f| %>
+  <% if @forestry.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@forestry.errors.count, "error") %> prohibited this forestry from being saved:</h2>
+
+      <ul>
+      <% @forestry.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

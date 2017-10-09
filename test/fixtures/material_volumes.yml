@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  classification_id: 
+  tree_id: 
+  diameter: 1
+  large: 9.99
+  mid: 9.99
+  small: 9.99
+  combustible: 9.99
+  garbage: 9.99
+  umbrella: 9.99
+
+two:
+  classification_id: 
+  tree_id: 
+  diameter: 1
+  large: 9.99
+  mid: 9.99
+  small: 9.99
+  combustible: 9.99
+  garbage: 9.99
+  umbrella: 9.99

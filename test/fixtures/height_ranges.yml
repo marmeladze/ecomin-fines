@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  classification_id: 
+  tree_id: 
+  h_range: 
+  diameter: 
+
+two:
+  classification_id: 
+  tree_id: 
+  h_range: 
+  diameter: 

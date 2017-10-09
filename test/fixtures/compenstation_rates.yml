@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  classification_id: 
+  tree_id: 
+  large_price: 9.99
+  mid_price: 
+  small_price: 9.99
+  combustible_price: 9.99
+  garbage_price: 9.99
+  umbrella_price: 9.99
+
+two:
+  classification_id: 
+  tree_id: 
+  large_price: 9.99
+  mid_price: 
+  small_price: 9.99
+  combustible_price: 9.99
+  garbage_price: 9.99
+  umbrella_price: 9.99
