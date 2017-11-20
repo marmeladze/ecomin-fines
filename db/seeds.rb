@@ -28,9 +28,9 @@ Forestry.create!([
 ])
 
 CompensationRate.create!([
-  {tree_id: 2, large_price: "49.69", mid_price: "43.21", small_price: "32.41", combustible_price: "5.18", garbage_price: "1.04", umbrella_price: "2.07", tariff_id: 1},
-  {tree_id: 2, large_price: "35.49", mid_price: "30.86", small_price: "23.15", combustible_price: "3.7", garbage_price: "0.74", umbrella_price: "1.48", tariff_id: 2},
-  {tree_id: 2, large_price: "21.3", mid_price: "18.52", small_price: "13.89", combustible_price: "2.22", garbage_price: "0.44", umbrella_price: "0.89", tariff_id: 3}
+  {tree_id: 1, large_price: "49.69", mid_price: "43.21", small_price: "32.41", combustible_price: "5.18", garbage_price: "1.04", umbrella_price: "2.07", tariff_id: 1},
+  {tree_id: 1, large_price: "35.49", mid_price: "30.86", small_price: "23.15", combustible_price: "3.7", garbage_price: "0.74", umbrella_price: "1.48", tariff_id: 2},
+  {tree_id: 1, large_price: "21.3", mid_price: "18.52", small_price: "13.89", combustible_price: "2.22", garbage_price: "0.44", umbrella_price: "0.89", tariff_id: 3}
 ])
 Detour.create!([
   {name: "3-cü dolay", description: nil, forestry_id: 1},
@@ -1241,7 +1241,6 @@ Quarter.create!([
 #   {tree_name: "Fıstıq", tree_id: 2, classification_name: "VII hündürlük dərəcəsi", classification_id: 7, tariff_rate: "II dərəcə", tariff_id: 2, diameter: 80, large: "2.832", mid: "0.0", small: "0.0", tech_sum: "2.832", combustible: "0.942", umbrella: "0.927", garbage: "0.33", large_price: "35.49", mid_price: "30.86", small_price: "23.15", combustible_price: "3.7", garbage_price: "0.74", umbrella_price: "1.48", material_large: "100.50768", material_mid: "0.0", material_small: "0.0", material_combustible: "3.4854", material_garbage: "0.2442", material_umbrella: "1.37196"},
 #   {tree_name: "Fıstıq", tree_id: 2, classification_name: "VII hündürlük dərəcəsi", classification_id: 7, tariff_rate: "I dərəcə", tariff_id: 1, diameter: 80, large: "2.832", mid: "0.0", small: "0.0", tech_sum: "2.832", combustible: "0.942", umbrella: "0.927", garbage: "0.33", large_price: "49.69", mid_price: "43.21", small_price: "32.41", combustible_price: "5.18", garbage_price: "1.04", umbrella_price: "2.07", material_large: "140.72208", material_mid: "0.0", material_small: "0.0", material_combustible: "4.87956", material_garbage: "0.3432", material_umbrella: "1.91889"}
 # ])
-
 Tariff.create!([
   {name: "I dərəcə", distance: "[0.0,10.0]"},
   {name: "II dərəcə", distance: "[10.1,25.0]"},
