@@ -1,4 +1,4 @@
-<%= form_for(@detour) do |f| %>
+<%= form_for [:admin, @detour] do |f| %>
   <% if @detour.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@detour.errors.count, "error") %> prohibited this detour from being saved:</h2>
@@ -10,8 +10,21 @@
       </ul>
     </div>
   <% end %>
+  <div class="field">
+     <%= f.label :forestry %>
+     <%= f.select :forestry_id, @forestries, :prompt => "Birini seç" %>
+  </div>
 
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_area :description %>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>
+  <hr />
 <% end %>

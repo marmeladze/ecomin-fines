@@ -1,0 +1,32 @@
+<%= form_for [:admin, @quarter] do |f| %>
+  <% if @quarter.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@quarter.errors.count, "error") %> prohibited this tree from being saved:</h2>
+
+      <ul>
+        <% @quarter.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field">
+     <%= f.label :detour %>
+     <%= f.select :detour_id, @detours, :prompt => "Birini seç" %>
+  </div>
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :lat %><br>
+    <%= f.text_field :lat %>
+  </div>
+  <div class="field">
+    <%= f.label :lng %><br>
+    <%= f.text_field :lng %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

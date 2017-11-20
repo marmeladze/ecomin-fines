@@ -1,5 +1,5 @@
 module Admin
-  class ClassificationsController < ApplicationController
+  class ClassificationsController < BaseController
     before_action :set_classification, only: [:show, :edit, :update, :destroy]
 
     # GET /classifications

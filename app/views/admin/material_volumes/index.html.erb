@@ -1,10 +1,19 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Material Volumes</h1>
+<h1>Material həcmləri</h1>
 
-<table>
+<table class="table table-hover table-bordered">
   <thead>
     <tr>
+      <th>Ağac</th>
+      <th>Hündürlük Dərəcəsi</th>
+      <th>Diametr [sm] </th>
+      <th colspan="3">
+        İşlək oduncağın həcmi [m<sup>3</sup>]
+      </th>
+      <th>Odun [m<sup>3</sup>]</th>
+      <th>Tullantı [m<sup>3</sup>]</th>
+      <th>Çətir [m<sup>3</sup>]</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -12,9 +21,17 @@
   <tbody>
     <% @material_volumes.each do |material_volume| %>
       <tr>
-        <td><%= link_to 'Show', material_volume %></td>
-        <td><%= link_to 'Edit', edit_material_volume_path(material_volume) %></td>
-        <td><%= link_to 'Destroy', material_volume, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= material_volume.tree.name %></td>
+        <td><%= material_volume.classification.name %></td>
+        <td><%= material_volume.diameter %></td>
+        <td><%= material_volume.large %></td>
+        <td><%= material_volume.mid %></td>
+        <td><%= material_volume.small %></td>
+        <td><%= material_volume.combustible %></td>
+        <td><%= material_volume.garbage %></td>
+        <td><%= material_volume.umbrella %></td>
+        <td><%= link_to 'Edit', edit_admin_material_volume_path(material_volume) %></td>
+        <td><%= link_to 'Destroy', admin_material_volume_path(material_volume), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -22,4 +39,4 @@
 
 <br>
 
-<%= link_to 'New Material volume', new_material_volume_path %>
+<%= link_to 'New Material volume', new_admin_material_volume_path, class: "btn btn-info" %>

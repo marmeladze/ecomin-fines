@@ -1,11 +1,11 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Classifications</h1>
+<h1>Hündürlük Dərəcələri</h1>
 
-<table>
+<table class="table table-hover table-bordered">
   <thead>
     <tr>
-      <th colspan="3"></th>
+      <th>Təsnif</th>
     </tr>
   </thead>
 
@@ -13,8 +13,6 @@
     <% @classifications.each do |classification| %>
       <tr>
         <td><%= classification.name %></td>
-        <td><%= link_to 'Edit', edit_admin_classification_path(classification) %></td>
-        <td><%= link_to 'Destroy', admin_classification_path(classification), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -22,4 +20,3 @@
 
 <br>
 
-<%= link_to 'New Classification', new_admin_classification_path %>

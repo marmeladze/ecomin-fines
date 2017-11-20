@@ -1,0 +1,100 @@
+<div class="well">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <%= report_header @region.name, @forestry.name, @detour.name_on_report, @quarter.name_on_report %>
+    </div>
+  </div>
+</div>
+
+<table class="table table-condensed table-bordered table-hover">
+ <tr>
+    <th rowspan="3">Ağac</th>
+    <th rowspan="3"> Diametr</th>
+    <th colspan="4">Texniki yararlılığına görə sayı, həcmlə</th>
+    <th colspan="8">HƏCMİ , m<sup>3</sup></th>
+  </tr>
+  <tr>
+    <th rowspan="2">İşlik</th>    
+    <th rowspan="2">Yarım işlik</th>
+    <th rowspan="2">Odunluq</th>
+    <th rowspan="2">Cəmi</th>
+    <th colspan="4">İşlik</th>
+    <th rowspan="2">Odun</th>
+    <th rowspan="2">Şax, çırpı</th>
+    <th rowspan="2">Çətirdən odun</th>
+    <th rowspan="2">Cəmi</th>
+  </tr>
+  <tr>
+    <th>İri</th>
+    <th>Orta</th>
+    <th>Xırda</th>
+    <th>Cəmi</th>     
+  </tr>
+  <% @results.each do |result| %>
+    <tr>
+      <th><%= result.tree_name %></th>
+      <td><%= result.diameter %></td>
+      <td><%= @material %></td>
+      <td><%= @semi %></td>
+      <td><%= @comb %></td>
+      <td><%= @sum %></td>
+      <td data-type='large'  data-price="<%= result.large_price.to_f %>">
+        <abbr title='<%= "(#{result.large} x #{@material}) + (#{result.large} x #{@semi} x 0.5)" %>'>
+          <%= "#{result.large*@material + result.large*@semi*0.5}" %>
+        </abbr>
+      </td>
+      <td  data-type='mid' data-price="<%= result.mid_price.to_f %>">
+        <abbr title='<%= "(#{result.mid} x #{@material}) + (#{result.mid} x #{@semi} x 0.5)" %>'>
+          <%= "#{result.mid*@material + result.mid*@semi*0.5}"  %>
+        </abbr>
+      </td>
+      <td data-type='small'  data-price="<%= result.small_price.to_f %>">        
+        <abbr title='<%= "(#{result.small} x #{@material}) + (#{result.small} x #{@semi} x 0.5)" %>'>
+          <%= "#{result.small*@material +result.small*@semi*0.5}" %>
+        </abbr>
+      </td>
+      <td> 
+        <abbr>
+          <%= "#{result.tech_sum*@material + result.tech_sum*@semi*0.5}" %>
+        </abbr>
+      </td>
+      <td data-type='combustible' data-price="<%= result.combustible_price.to_f %>">
+        <abbr title='<%= "#{result.combustible}x#{@sum} + #{result.tech_sum} x #{@semi} x 0.5+ #{result.tech_sum} x #{@comb}" %>'>
+          <%= "#{result.combustible*@sum + result.tech_sum*@semi*0.5+result.tech_sum*@comb}" %>
+        </abbr>
+      </td>
+      <td data-type='garbage'  data-price="<%= result.garbage_price.to_f %>">
+        <abbr title='<%= "(#{result.garbage} x #{@sum})" %>'>
+          <%= "#{result.garbage*@sum}" %>
+        </abbr>
+      </td>
+      <td data-type='umbrella' data-price="<%= result.umbrella_price.to_f %>">
+        <abbr title='<%= "(#{result.umbrella} x #{@sum})" %>'>
+          <%= "#{result.umbrella*@sum}" %>
+        </abbr>
+      </td>
+      <td>
+        <%= "#{(result.tech_sum + result.combustible + result.garbage + result.umbrella)*@sum}" %>
+      </td>
+    </tr>
+  <% end %>
+  <tr>
+    <td colspan="6">
+      <p>
+      CƏMİ
+      </p>
+      <td data-type='large'></td>
+      <td data-type='mid'></td>
+      <td data-type='small'></td>
+      <td data-type=''></td>
+      <td data-type='combustible'></td>
+      <td data-type='garbage'></td>
+      <td data-type='umbrella'></td>
+      <td><strong id="total-sum"></strong></td>
+    </td>
+  </tr>
+</table>
+
+<div class="no-print">
+  <%= link_to "Çapa göndər", "#", onclick: "printPage()", class: "btn btn-success" %>
+</div>

@@ -1,4 +1,4 @@
-<%= form_for(@compensation_rate) do |f| %>
+<%= form_for [:admin, @compensation_rate] do |f| %>
   <% if @compensation_rate.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@compensation_rate.errors.count, "error") %> prohibited this compensation_rate from being saved:</h2>
@@ -10,8 +10,54 @@
       </ul>
     </div>
   <% end %>
+ <div class="field">
+     <%= f.label "Nırx dərəcəsi" %>
+     <%= f.select :tariff_id, @tariffs, :prompt => "Birini seç" %>
+  </div>
+
+  <div class="field">
+     <%= f.label :tree %>
+     <%= f.select :tree_id, @trees, :prompt => "Birini seç" %>
+  </div>
+  <hr>
+  
+  <strong>İşlək oduncaq</strong>
+
+  <div class="field">
+    <%= f.label :large_price %><br>
+    <%= f.text_field :large_price %>
+  </div> 
+  <div class="field">
+    <%= f.label :mid_price %><br>
+    <%= f.text_field :mid_price %>
+  </div> 
+  <div class="field">
+    <%= f.label :small_price %><br>
+    <%= f.text_field :small_price %>
+  </div> 
+
+  <hr>
+  
+  <strong>Digər</strong>
+  
+  <div class="field">
+    <%= f.label :combustible_price %><br>
+    <%= f.text_field :combustible_price %>
+  </div> 
+
+  <div class="field">
+    <%= f.label :garbage_price %><br>
+    <%= f.text_field :garbage_price %>
+  </div> 
+
+  <div class="field">
+    <%= f.label :umbrella_price %><br>
+    <%= f.text_field :umbrella_price %>
+  </div> 
 
   <div class="actions">
     <%= f.submit %>
   </div>
 <% end %>
+
+

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171008130543) do
+ActiveRecord::Schema.define(version: 20171010173452) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 20171008130543) do
     t.datetime "updated_at",  null: false
   end
 
-  create_table "compenstation_rates", force: :cascade do |t|
+  create_table "compensation_rates", force: :cascade do |t|
     t.integer  "classification_id"
     t.integer  "tree_id"
     t.decimal  "large_price",       precision: 5, scale: 2, default: 0.0
@@ -36,8 +36,8 @@ ActiveRecord::Schema.define(version: 20171008130543) do
     t.datetime "updated_at",                                              null: false
   end
 
-  add_index "compenstation_rates", ["classification_id"], name: "index_compenstation_rates_on_classification_id", using: :btree
-  add_index "compenstation_rates", ["tree_id"], name: "index_compenstation_rates_on_tree_id", using: :btree
+  add_index "compensation_rates", ["classification_id"], name: "index_compensation_rates_on_classification_id", using: :btree
+  add_index "compensation_rates", ["tree_id"], name: "index_compensation_rates_on_tree_id", using: :btree
 
   create_table "detours", force: :cascade do |t|
     t.string   "name"
@@ -88,6 +88,17 @@ ActiveRecord::Schema.define(version: 20171008130543) do
   add_index "material_volumes", ["classification_id"], name: "index_material_volumes_on_classification_id", using: :btree
   add_index "material_volumes", ["tree_id"], name: "index_material_volumes_on_tree_id", using: :btree
 
+  create_table "quarters", force: :cascade do |t|
+    t.string   "name"
+    t.string   "lat"
+    t.string   "lng"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "detour_id"
+  end
+
+  add_index "quarters", ["detour_id"], name: "index_quarters_on_detour_id", using: :btree
+
   create_table "regions", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
@@ -102,12 +113,13 @@ ActiveRecord::Schema.define(version: 20171008130543) do
     t.datetime "updated_at",  null: false
   end
 
-  add_foreign_key "compenstation_rates", "classifications"
-  add_foreign_key "compenstation_rates", "trees"
+  add_foreign_key "compensation_rates", "classifications"
+  add_foreign_key "compensation_rates", "trees"
   add_foreign_key "detours", "forestries"
   add_foreign_key "forestries", "regions"
   add_foreign_key "height_ranges", "classifications"
   add_foreign_key "height_ranges", "trees"
   add_foreign_key "material_volumes", "classifications"
   add_foreign_key "material_volumes", "trees"
+  add_foreign_key "quarters", "detours"
 end

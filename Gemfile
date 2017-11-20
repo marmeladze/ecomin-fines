@@ -7,6 +7,9 @@ gem 'rails', '4.2.8'
 gem 'pg', '~> 0.15'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
+gem 'bootstrap-sass', '3.3.7'
+gem 'bootswatch-rails', '~> 3'
+gem 'font-awesome-rails'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
@@ -27,8 +30,7 @@ gem 'pry-rails'
 # gem 'bcrypt', '~> 3.1.7'
 
 # Use Unicorn as the app server
-gem 'unicorn'
-
+gem 'puma'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
@@ -38,6 +40,7 @@ group :development, :test do
 end
 
 group :development do
+  gem 'seed_dump'
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
 

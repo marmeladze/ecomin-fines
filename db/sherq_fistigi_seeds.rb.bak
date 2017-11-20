@@ -1,0 +1,24 @@
+files = [
+  {path: "sherq_fistigi_V_classification.csv", classification_id: 5},
+  {path: "sherq_fistigi_IV_classification.csv", classification_id: 4},
+  {path: "sherq_fistigi_III_classification.csv", classification_id: 3},
+  {path: "sherq_fistigi_II_classification.csv", classification_id: 2},
+  {path: "sherq_fistigi_I_classification.csv", classification_id: 1},
+  {path: "sherq_fistigi_VI_classification.csv", classification_id: 6},
+  {path: "sherq_fistigi_VII_classification.csv", classification_id: 7},
+]
+
+files.each do |f|
+  path = Rails.root.join('public', 'sheets', f[:path])
+  data = CSV.open(path, headers: true, col_sep: "\t").as_json 
+  hashes = data.map {|e| e.to_h }
+  hashes.map{|h| h.map{|k,v| h[k] = k == 'diameter' ? v.to_i : ((v.to_f)*0.001).round(4) }}
+  hashes.each do |dict|
+    dict.merge!({tree_id: 2, classification_id: f[:classification_id]})
+    MaterialVolume.create! dict
+  end
+end
+
+
+
+sample.map{|h| h.map{|k,v| h[k] = ((v.to_f)*0.001).round(4) unless k == "diameter" }}

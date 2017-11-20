@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ecology Fines</title>
+  <%= javascript_include_tag 'admin' %>
+  <%= stylesheet_link_tag    'admin', media: 'all' %>
+  <%= stylesheet_link_tag    'print', media: 'print' %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <div class="container">
+    <div class="no-print">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="navbar navbar-default navbar-fixed-top">
+          <div class="container">
+            <nav class="navbar-collapse collapse">
+              <ul class="nav navbar-nav">
+                <li><%= link_to "Axtarış", admin_path %></li>                
+                <li><%= link_to "Hündürlük dərəcələri", admin_classifications_path %></li>
+                <li><%= link_to "Ağac növləri", admin_trees_path %></li>
+                <li><%= link_to "Rayonlar", admin_regions_path %></li>
+                <li><%= link_to "Dolaylar", admin_detours_path %></li>
+                <li><%= link_to "Meşəbəylikləri", admin_forestries_path %></li>
+                <li><%= link_to "İşlək material həcmləri", admin_material_volumes_path %></li>
+                <li><%= link_to "Cərimə əmsalları", admin_compensation_rates_path %></li>
+                <li><%= link_to "Ağac hündürlükləri", admin_height_ranges_path %></li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+ 
+    <div class="row">
+      <div class="col-md-12">
+        <%= yield %>            
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

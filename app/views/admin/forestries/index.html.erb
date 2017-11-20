@@ -2,9 +2,10 @@
 
 <h1>Listing Forestries</h1>
 
-<table>
+<table class="table table-bordered table-hover">
   <thead>
     <tr>
+      <th>Adı</tr>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -12,9 +13,9 @@
   <tbody>
     <% @forestries.each do |forestry| %>
       <tr>
-        <td><%= link_to 'Show', forestry %></td>
-        <td><%= link_to 'Edit', edit_forestry_path(forestry) %></td>
-        <td><%= link_to 'Destroy', forestry, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= forestry.first  %></td>
+        <td><%= link_to 'Edit', edit_admin_forestry_path(forestry.last) %></td>
+        <td><%= link_to 'Destroy', admin_forestry_path(forestry.last), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -22,4 +23,4 @@
 
 <br>
 
-<%= link_to 'New Forestry', new_forestry_path %>
+<%= link_to 'New Forestry', new_admin_forestry_path, class: "btn btn-info" %>

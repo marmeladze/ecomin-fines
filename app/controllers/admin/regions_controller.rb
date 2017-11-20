@@ -1,5 +1,5 @@
 module Admin
-  class RegionsController < ApplicationController
+  class RegionsController < BaseController
     before_action :set_region, only: [:show, :edit, :update, :destroy]
 
     # GET /regions

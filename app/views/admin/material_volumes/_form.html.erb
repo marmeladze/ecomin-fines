@@ -1,4 +1,4 @@
-<%= form_for(@material_volume) do |f| %>
+<%= form_for [:admin, @material_volume] do |f| %>
   <% if @material_volume.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@material_volume.errors.count, "error") %> prohibited this material_volume from being saved:</h2>
@@ -10,6 +10,56 @@
       </ul>
     </div>
   <% end %>
+ <div class="field">
+     <%= f.label :classification %>
+     <%= f.select :classification_id, @classifications, :prompt => "Birini seç" %>
+  </div>
+
+  <div class="field">
+     <%= f.label :tree %>
+     <%= f.select :tree_id, @trees, :prompt => "Birini seç" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :diameter %><br>
+    <%= f.text_field :diameter %>
+  </div>   
+
+  <hr>
+  
+  <strong>İşlək oduncaq</strong>
+
+  <div class="field">
+    <%= f.label :large %><br>
+    <%= f.text_field :large %>
+  </div> 
+  <div class="field">
+    <%= f.label :mid %><br>
+    <%= f.text_field :mid %>
+  </div> 
+  <div class="field">
+    <%= f.label :small %><br>
+    <%= f.text_field :small %>
+  </div> 
+
+  <hr>
+  
+  <strong>Digər</strong>
+  
+  <div class="field">
+    <%= f.label :combustible %><br>
+    <%= f.text_field :combustible %>
+  </div> 
+
+  <div class="field">
+    <%= f.label :garbage %><br>
+    <%= f.text_field :garbage %>
+  </div> 
+
+  <div class="field">
+    <%= f.label :umbrella %><br>
+    <%= f.text_field :umbrella %>
+  </div> 
 
   <div class="actions">
     <%= f.submit %>

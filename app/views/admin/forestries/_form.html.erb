@@ -1,4 +1,4 @@
-<%= form_for(@forestry) do |f| %>
+<%= form_for [:admin, @forestry] do |f| %>
   <% if @forestry.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@forestry.errors.count, "error") %> prohibited this forestry from being saved:</h2>
@@ -10,7 +10,18 @@
       </ul>
     </div>
   <% end %>
-
+  <div class="field">
+    <%= f.label :region %>
+    <%= f.select :region_id, @regions, :prompt => "Birini seç" %>
+  </div>
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_area :description %>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>

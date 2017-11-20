@@ -1,0 +1,83 @@
+<%= form_tag search_path, method: :get do %>
+  <div class="row">
+    <div class="col-md-3">
+      <div class="well">
+        <h3>Rayon</h3>
+        <%= select_tag "region", options_from_collection_for_select(@regions, :last, :first), {include_blank: true} %>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="well">
+        <h3>Meşəbəyliyi</h3>
+        <%= select_tag "forestry" %>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="well">
+        <h3>Dolay</h3>
+        <%= select_tag "detour", options_from_collection_for_select(@detours, :last, :first) %>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="well">
+        <h3>Kvartal</h3>
+        <%= select_tag "quarter", options_from_collection_for_select(@quarters, :last, :first) %>
+      </div>
+    </div>
+  </div>
+
+
+    <div class="row">
+        <div class="col-md-3">
+          <div class="well">
+            <%= label_tag "Ağac" %><hr>
+            <%= select_tag "tree_id", options_from_collection_for_select(@trees, :last, :first) %>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="well">
+            <%= label_tag "Hündürlük dərəcəsi" %><hr>
+            <%= select_tag "classification_id", options_from_collection_for_select(@classifications, :last, :first) %>      
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="well">
+            <%= label_tag "diametr" %><hr>
+            <%= number_field_tag "diameter", "8", min: 8, max: 200, step: 4 %>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="well">
+            <%= label_tag "Nırx dərəcəsi" %><hr>
+            <%= select_tag "tariff_id", options_from_collection_for_select(@tariffs, :last, :first) %>
+          </div>
+        </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3">
+        <div class="well">
+          <%= label_tag "İşlik" %><hr>
+          <%= number_field_tag "material", "1", min: 0, max: 200, step: 1 %>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="well">
+          <%= label_tag "Yarım işlik" %><hr>
+          <%= number_field_tag "semi_material", "1", min: 0, max: 200, step: 1 %>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="well">
+          <%= label_tag "Odun" %><hr>
+          <%= number_field_tag "combustible", "1", min: 0, max: 200, step: 1 %>
+        </div>
+      </div>      
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-md-6">
+        <%= submit_tag "Hesabla", class: "btn btn-success" %>
+      </div>
+    </div>
+<% end %>
+

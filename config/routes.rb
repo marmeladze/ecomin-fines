@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
   
-  get '/admin' => 'admin/height_ranges#index'
+  get '/admin' => 'admin/base#index'
+  get '/load_forestries' => 'admin/base#load_forestries'
+  get '/search' => 'admin/base#search'
 
   namespace :admin do
+    resources :quarters
     resources :regions
     resources :trees
     resources :compensation_rates

@@ -1,6 +1,7 @@
 module Admin
-  class DetoursController < ApplicationController
-    before_action :set_detour, only: [:show, :edit, :update, :destroy]
+  class DetoursController < BaseController
+    before_action :set_detour,  only: [:show, :edit, :update, :destroy]
+    before_action :set_related, only: [:new, :edit]
 
     # GET /detours
     # GET /detours.json
@@ -26,51 +27,41 @@ module Admin
     # POST /detours.json
     def create
       @detour = Detour.new(detour_params)
-
-      respond_to do |format|
-        if @detour.save
-          format.html { redirect_to @detour, notice: 'Detour was successfully created.' }
-          format.json { render :show, status: :created, location: @detour }
-        else
-          format.html { render :new }
-          format.json { render json: @detour.errors, status: :unprocessable_entity }
-        end
+      if @detour.save
+        redirect_to admin_detours_path, notice: 'Detour was successfully created.'
+      else
+        render :new
       end
     end
 
-    # PATCH/PUT /detours/1
-    # PATCH/PUT /detours/1.json
+
     def update
-      respond_to do |format|
-        if @detour.update(detour_params)
-          format.html { redirect_to @detour, notice: 'Detour was successfully updated.' }
-          format.json { render :show, status: :ok, location: @detour }
-        else
-          format.html { render :edit }
-          format.json { render json: @detour.errors, status: :unprocessable_entity }
-        end
+      if @detour.update(detour_params)
+        redirect_to admin_detours_path, notice: 'Detour was successfully updated.'
+      else
+        render :edit
       end
     end
 
-    # DELETE /detours/1
-    # DELETE /detours/1.json
+
     def destroy
       @detour.destroy
-      respond_to do |format|
-        format.html { redirect_to detours_url, notice: 'Detour was successfully destroyed.' }
-        format.json { head :no_content }
-      end
+      redirect_to admin_detours_url, notice: 'Detour was successfully destroyed.'
     end
 
     private
-      # Use callbacks to share common setup or constraints between actions.
-      def set_detour
-        @detour = Detour.find(params[:id])
-      end
 
-      # Never trust parameters from the scary internet, only allow the white list through.
-      def detour_params
-        params.fetch(:detour, {})
-      end
+    def set_related
+      @forestries = Forestry.with_region
+    end
+
+    def set_detour
+      @detour = Detour.find(params[:id])
+    end
+
+    def detour_params
+      params.require(:detour).permit(:name, :forestry_id, :description)
+    end
+
   end
 end
