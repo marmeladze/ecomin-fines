@@ -75,8 +75,4 @@ test:
 production:
   url: <%= ENV['DATABASE_URL'] %>
 #
-# production:
-#   <<: *default
-#   database: hra_production
-#   username: hra
-#   password: <%= ENV['HRA_DATABASE_PASSWORD'] %>
+
