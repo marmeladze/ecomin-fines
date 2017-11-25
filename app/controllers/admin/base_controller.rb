@@ -12,7 +12,7 @@ module Admin
     end
 
     def load_forestries 
-      region_id = params[:region_id]
+      region_id = params[:region_id] || Region.first
       @forestries = Forestry.where(region_id: region_id).pluck(:name, :id)
       respond_to do |format|
         format.json { render json: @forestries }
@@ -35,7 +35,12 @@ module Admin
                   .by_diameter(params[:diameter])
                   .by_tariff(params[:tariff_id])
                   .by_classification(params[:classification_id])
-      render :results
+      if request.xhr?
+        render partial: 'table_items', layout: false
+      else 
+        render :results
+      end
+
     end
   end
 end

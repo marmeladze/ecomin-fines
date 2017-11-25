@@ -55,6 +55,5 @@ module Admin
     def quarter_params
       params.require(:quarter).permit(:name, :lat, :lng, :detour_id)
     end
-
   end
 end

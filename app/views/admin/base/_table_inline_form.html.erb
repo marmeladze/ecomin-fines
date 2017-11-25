@@ -1,0 +1,18 @@
+<tr id='inline-remote-form' class="hidden-print">
+  <td><%= select_tag "tree_id", options_from_collection_for_select(Tree.pluck(:name, :id), :last, :first), id: 'inline-remote-form-tree-id' %></td>
+  <td><%= number_field_tag "diameter", "8", min: 8, max: 200, step: 4, class: "input-sm", id: 'inline-remote-form-tree-diameter' %></td>
+  <td><%= number_field_tag "material", "0", min: 0, max: 200, step: 1, class: "input-sm", id: 'inline-remote-form-tree-material' %></td>
+  <td><%= number_field_tag "semi_material", "0", min: 0, max: 200, step: 1, class: "input-sm", id: 'inline-remote-form-tree-semi-material' %></td>
+  <td><%= number_field_tag "combustible", "0", min: 0, max: 200, step: 1, class: "input-sm", id: 'inline-remote-form-tree-combustible' %></td>
+  <td></td>
+
+  <td></td>
+  <td></td>
+  <td></td>
+  <td></td>
+
+  <td></td>
+  <td></td>
+  <td></td>
+  <td></td>
+</tr>
