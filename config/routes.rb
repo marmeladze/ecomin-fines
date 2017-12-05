@@ -4,7 +4,14 @@ Rails.application.routes.draw do
   get '/load_forestries' => 'admin/base#load_forestries'
   get '/search' => 'admin/base#search'
 
+  get '/login' => 'sessions#new'
+  post '/login' => 'sessions#create'
+  delete '/logout' => 'sessions#destroy'
+
   namespace :admin do
+    resources :users do 
+      put "remove", on: :member
+    end
     resources :quarters
     resources :regions
     resources :trees

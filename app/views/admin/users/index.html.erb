@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<h1>İstifadəçilərin siyahısı</h1>
+
+<%= link_to 'Yeni İstifadəçi', new_admin_user_path, class: "btn btn-success" %>
+
+<table class="table table-bordered table-hover">
+  <thead>
+    <tr>
+      <th>Adı soyadı</th>
+      <th>E-poçt</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.full_name %></td>
+        <td><%= link_to 'Düzəliş', edit_admin_user_path(user) %></td>
+        <td><%= link_to 'Sil', remove_admin_user_path(user), method: :put, data: { confirm: 'Silinsin?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -17,7 +17,7 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  username: epcs_dev
+  username: rails_user
   password: geometry123
   pool: 5
 

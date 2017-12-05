@@ -2,11 +2,12 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 9.5.6
--- Dumped by pg_dump version 9.5.6
+-- Dumped from database version 10.1
+-- Dumped by pg_dump version 10.1
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SET check_function_bodies = false;
@@ -51,6 +52,7 @@ CREATE TABLE classifications (
 --
 
 CREATE SEQUENCE classifications_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -89,6 +91,7 @@ CREATE TABLE compensation_rates (
 --
 
 CREATE SEQUENCE compensation_rates_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -122,6 +125,7 @@ CREATE TABLE detours (
 --
 
 CREATE SEQUENCE detours_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -155,6 +159,7 @@ CREATE TABLE forestries (
 --
 
 CREATE SEQUENCE forestries_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -189,6 +194,7 @@ CREATE TABLE height_ranges (
 --
 
 CREATE SEQUENCE height_ranges_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -228,6 +234,7 @@ CREATE TABLE material_volumes (
 --
 
 CREATE SEQUENCE material_volumes_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -262,6 +269,7 @@ CREATE TABLE quarters (
 --
 
 CREATE SEQUENCE quarters_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -294,6 +302,7 @@ CREATE TABLE regions (
 --
 
 CREATE SEQUENCE regions_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -386,6 +395,7 @@ CREATE VIEW searches AS
 --
 
 CREATE SEQUENCE tariffs_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -405,6 +415,7 @@ ALTER SEQUENCE tariffs_id_seq OWNED BY tariffs.id;
 --
 
 CREATE SEQUENCE trees_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -420,77 +431,120 @@ ALTER SEQUENCE trees_id_seq OWNED BY trees.id;
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: users; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE users (
+    id integer NOT NULL,
+    first_name character varying,
+    last_name character varying,
+    email character varying,
+    password_digest character varying,
+    deleted boolean,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE users_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE users_id_seq OWNED BY users.id;
+
+
+--
+-- Name: classifications id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY classifications ALTER COLUMN id SET DEFAULT nextval('classifications_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: compensation_rates id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY compensation_rates ALTER COLUMN id SET DEFAULT nextval('compensation_rates_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: detours id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY detours ALTER COLUMN id SET DEFAULT nextval('detours_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: forestries id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY forestries ALTER COLUMN id SET DEFAULT nextval('forestries_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: height_ranges id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY height_ranges ALTER COLUMN id SET DEFAULT nextval('height_ranges_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: material_volumes id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY material_volumes ALTER COLUMN id SET DEFAULT nextval('material_volumes_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: quarters id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY quarters ALTER COLUMN id SET DEFAULT nextval('quarters_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: regions id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY regions ALTER COLUMN id SET DEFAULT nextval('regions_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: tariffs id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY tariffs ALTER COLUMN id SET DEFAULT nextval('tariffs_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: trees id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY trees ALTER COLUMN id SET DEFAULT nextval('trees_id_seq'::regclass);
 
 
 --
--- Name: classifications_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: users id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
+
+
+--
+-- Name: classifications classifications_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY classifications
@@ -498,7 +552,7 @@ ALTER TABLE ONLY classifications
 
 
 --
--- Name: compensation_rates_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: compensation_rates compensation_rates_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY compensation_rates
@@ -506,7 +560,7 @@ ALTER TABLE ONLY compensation_rates
 
 
 --
--- Name: detours_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: detours detours_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY detours
@@ -514,7 +568,7 @@ ALTER TABLE ONLY detours
 
 
 --
--- Name: forestries_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: forestries forestries_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY forestries
@@ -522,7 +576,7 @@ ALTER TABLE ONLY forestries
 
 
 --
--- Name: height_ranges_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: height_ranges height_ranges_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY height_ranges
@@ -530,7 +584,7 @@ ALTER TABLE ONLY height_ranges
 
 
 --
--- Name: material_volumes_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: material_volumes material_volumes_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY material_volumes
@@ -538,7 +592,7 @@ ALTER TABLE ONLY material_volumes
 
 
 --
--- Name: quarters_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: quarters quarters_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY quarters
@@ -546,7 +600,7 @@ ALTER TABLE ONLY quarters
 
 
 --
--- Name: regions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: regions regions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY regions
@@ -554,7 +608,7 @@ ALTER TABLE ONLY regions
 
 
 --
--- Name: tariffs_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: tariffs tariffs_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY tariffs
@@ -562,11 +616,19 @@ ALTER TABLE ONLY tariffs
 
 
 --
--- Name: trees_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: trees trees_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY trees
     ADD CONSTRAINT trees_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY users
+    ADD CONSTRAINT users_pkey PRIMARY KEY (id);
 
 
 --
@@ -633,6 +695,13 @@ CREATE INDEX index_quarters_on_detour_id ON quarters USING btree (detour_id);
 
 
 --
+-- Name: index_users_on_email; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_users_on_email ON users USING btree (email);
+
+
+--
 -- Name: unique_schema_migrations; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -640,7 +709,7 @@ CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (v
 
 
 --
--- Name: fk_rails_2ce8d43673; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: height_ranges fk_rails_2ce8d43673; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY height_ranges
@@ -648,7 +717,7 @@ ALTER TABLE ONLY height_ranges
 
 
 --
--- Name: fk_rails_3338fc3b75; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: material_volumes fk_rails_3338fc3b75; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY material_volumes
@@ -656,7 +725,7 @@ ALTER TABLE ONLY material_volumes
 
 
 --
--- Name: fk_rails_4e97d4c24c; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: height_ranges fk_rails_4e97d4c24c; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY height_ranges
@@ -664,7 +733,7 @@ ALTER TABLE ONLY height_ranges
 
 
 --
--- Name: fk_rails_5f9f2389e4; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: compensation_rates fk_rails_5f9f2389e4; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY compensation_rates
@@ -672,7 +741,7 @@ ALTER TABLE ONLY compensation_rates
 
 
 --
--- Name: fk_rails_71ce1babf4; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: material_volumes fk_rails_71ce1babf4; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY material_volumes
@@ -680,7 +749,7 @@ ALTER TABLE ONLY material_volumes
 
 
 --
--- Name: fk_rails_96fee696bd; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: detours fk_rails_96fee696bd; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY detours
@@ -688,7 +757,7 @@ ALTER TABLE ONLY detours
 
 
 --
--- Name: fk_rails_c9209bd54c; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: quarters fk_rails_c9209bd54c; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY quarters
@@ -696,7 +765,7 @@ ALTER TABLE ONLY quarters
 
 
 --
--- Name: fk_rails_e472ea8693; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: forestries fk_rails_e472ea8693; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY forestries
@@ -704,7 +773,7 @@ ALTER TABLE ONLY forestries
 
 
 --
--- Name: fk_rails_fc72f3e9e8; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: compensation_rates fk_rails_fc72f3e9e8; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY compensation_rates
@@ -744,4 +813,8 @@ INSERT INTO schema_migrations (version) VALUES ('20171026163952');
 INSERT INTO schema_migrations (version) VALUES ('20171026164034');
 
 INSERT INTO schema_migrations (version) VALUES ('20171113095158');
+
+INSERT INTO schema_migrations (version) VALUES ('20171205132252');
+
+INSERT INTO schema_migrations (version) VALUES ('20171205132355');
 
