@@ -111,6 +111,11 @@ window.onload = function() {
     xhr.send();
   });
 
+  document.getElementById('make-report').addEventListener('click', function(e){
+    e.preventDefault();
+    getDataFromSearchTable();
+  });
+
 }
 
 function printPage() {
@@ -124,6 +129,7 @@ function makeJSONFromRowData(row){
     forestry_id: getParameterByName('forestry'),
     detour_id: getParameterByName('detour'),
     quarter_id: getParameterByName('quarter'),
+    tariff_id: getParameterByName('tariff_id'),
     tree_id: row.cells[0].dataset.treePk,
 
     diameter: row.cells[1].innerText,
@@ -141,14 +147,16 @@ function makeJSONFromRowData(row){
     material_small_volume: row.cells[8].innerText,
     material_small_price: row.cells[8].dataset.price,
 
-    material_combustible_volume: row.cells[10].innerText,
-    material_combustible_price: row.cells[10].dataset.price,
+    combustible_volume: row.cells[10].innerText,
+    combustible_price: row.cells[10].dataset.price,
 
-    material_garbage_volume: row.cells[11].innerText,
-    material_garbage_price: row.cells[11].dataset.price,
+    garbage_volume: row.cells[11].innerText,
+    garbage_price: row.cells[11].dataset.price,
 
-    material_umbrella_volume: row.cells[12].innerText,
-    material_umbrella_price: row.cells[12].dataset.price,
+    umbrella_volume: row.cells[12].innerText,
+    umbrella_price: row.cells[12].dataset.price,
+    
+    user_id: document.querySelector("[data-user-id]").dataset.userId
   }
 }
 
@@ -156,10 +164,20 @@ function getDataFromSearchTable() {
   var rows = Array.from(document.querySelector('tbody').rows);
 
   rows.forEach(function(row) {
-      var rowObj = makeJSONFromRowData(row);
+    var rowObj = makeJSONFromRowData(row);
+    
+    var url = '/create-report?' + serialize(rowObj);
 
+    var xhr = new XMLHttpRequest();
 
+    xhr.onreadystatechange = function(){
+      if (this.readyState == 4 && this.status == 200) {
 
-
+      }
+    }
+    xhr.open('POST', url, true);
+    xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+    xhr.setRequestHeader("X-CSRF-Token", document.querySelector('[name="csrf-token"]').content);
+    xhr.send();
   });
 }

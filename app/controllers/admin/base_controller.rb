@@ -20,6 +20,25 @@ module Admin
       end
     end
 
+    def create_report
+      report = Report.new report_params 
+      verbatim = [
+        params[:classification_id], 
+        params[:user_id], 
+        params[:region_id],
+        params[:forestry_id], 
+        params[:detour_id],
+        params[:tariff_id],
+        params[:quarter_id]
+      ].push(Date.today.to_s).join("-")
+      report.verbatim = Digest::MD5.hexdigest(verbatim)
+      if report.save
+        render plain: "Report created"
+      else
+        render plain: "Error while creating report entity"
+      end
+    end
+
     def search
       @material, @semi, @comb = [
         params[:material] || 1, 
@@ -41,8 +60,40 @@ module Admin
       else 
         render :results
       end
-
     end
+
+    private
+
+    def report_params
+      params
+        .permit(
+           :classification_id,
+           :region_id,
+           :forestry_id,
+           :detour_id,
+           :quarter_id,
+           :tree_id,
+           :diameter,
+           :tariff_id,
+           :material_count,
+           :semi_material_count,
+           :combustible_count,
+           :material_large_volume,
+           :material_large_price,
+           :material_mid_volume,
+           :material_mid_price,
+           :material_small_volume,
+           :material_small_price,
+           :combustible_volume,
+           :combustible_price,
+           :garbage_volume,
+           :garbage_price,
+           :umbrella_volume,
+           :umbrella_price,
+           :user_id
+        )
+    end    
+
   end
 end
-
+    

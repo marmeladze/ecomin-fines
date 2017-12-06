@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   get '/load_forestries' => 'admin/base#load_forestries'
   get '/search' => 'admin/base#search'
 
+  post '/create-report' => 'admin/base#create_report'
+
   get '/login' => 'sessions#new'
   post '/login' => 'sessions#create'
   delete '/logout' => 'sessions#destroy'

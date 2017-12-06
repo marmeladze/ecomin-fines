@@ -6,7 +6,7 @@
   </div>
 </div>
 
-<table class="table table-condensed table-bordered table-hover">
+<table data-user-id="<%= session[:user_id] %>" class="table table-condensed table-bordered table-hover">
   <thead>
     <tr>
       <th rowspan="3">Ağac</th>
@@ -64,6 +64,11 @@
     <div class="col-md-2">
       <%= link_to "Əlavə et", "#", class: "btn btn-info", id: 'inline-form-submit' %>  
     </div>
+
+    <div class="col-md-2">
+      <%= link_to "Tərtib et", "#", class: "btn btn-default", id: 'make-report' %>  
+    </div>
+
   </div>
 
 </div>
