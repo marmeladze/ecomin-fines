@@ -1,5 +1,6 @@
 module Admin
   class MaterialVolumesController < BaseController
+    before_action :logged_in_user
     before_action :set_material_volume, only: [:show, :edit, :update, :destroy]
     before_action :set_related, only: [:edit, :new]
 

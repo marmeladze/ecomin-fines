@@ -25,6 +25,8 @@
                 <li><%= link_to "İşlək material həcmləri", admin_material_volumes_path %></li>
                 <li><%= link_to "Cərimə əmsalları", admin_compensation_rates_path %></li>
                 <li><%= link_to "Ağac hündürlükləri", admin_height_ranges_path %></li>
+                <li><%= link_to "Çıxış", logout_path, method: :delete %></li>
+                <li><%= link_to current_user.full_name, "#" %></li>
               </ul>
             </nav>
           </div>

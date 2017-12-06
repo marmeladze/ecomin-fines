@@ -1,5 +1,6 @@
 module Admin
   class QuartersController < BaseController
+    before_action :logged_in_user
     before_action :set_quarter, only: [:show, :edit, :update, :destroy]
     before_action :set_related, only: [:new, :edit]
 

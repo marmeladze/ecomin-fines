@@ -1,23 +1,23 @@
 <% @results.each do |result| %>
   <tr>
-    <th><%= result.tree_name %></th>
+    <th data-tree-pk="<%= result.tree_id %>"><%= result.tree_name %></th>
     <td><%= result.diameter %></td>
     <td><%= @material %></td>
     <td><%= @semi %></td>
     <td><%= @comb %></td>
     <td><%= @sum %></td>
     <td data-type='large'  data-price="<%= result.large_price.to_f %>">
-      <abbr class="hidden-print" title='<%= "(#{result.large} x #{@material}) + (#{result.large} x #{@semi} x 0.5)" %>'>
+      <abbr title='<%= "(#{result.large} x #{@material}) + (#{result.large} x #{@semi} x 0.5)" %>'>
         <%= "#{result.large*@material + result.large*@semi*0.5}" %>
       </abbr>
     </td>
     <td  data-type='mid' data-price="<%= result.mid_price.to_f %>">
-      <abbr class="hidden-print" title='<%= "(#{result.mid} x #{@material}) + (#{result.mid} x #{@semi} x 0.5)" %>'>
+      <abbr title='<%= "(#{result.mid} x #{@material}) + (#{result.mid} x #{@semi} x 0.5)" %>'>
         <%= "#{result.mid*@material + result.mid*@semi*0.5}"  %>
       </abbr>
     </td>
     <td data-type='small'  data-price="<%= result.small_price.to_f %>">        
-      <abbr class="hidden-print" title='<%= "(#{result.small} x #{@material}) + (#{result.small} x #{@semi} x 0.5)" %>'>
+      <abbr title='<%= "(#{result.small} x #{@material}) + (#{result.small} x #{@semi} x 0.5)" %>'>
         <%= "#{result.small*@material +result.small*@semi*0.5}" %>
       </abbr>
     </td>
@@ -27,17 +27,17 @@
       </abbr>
     </td>
     <td data-type='combustible' data-price="<%= result.combustible_price.to_f %>">
-      <abbr class="hidden-print" title='<%= "#{result.combustible}x#{@sum} + #{result.tech_sum} x #{@semi} x 0.5+ #{result.tech_sum} x #{@comb}" %>'>
+      <abbr title='<%= "#{result.combustible}x#{@sum} + #{result.tech_sum} x #{@semi} x 0.5+ #{result.tech_sum} x #{@comb}" %>'>
         <%= "#{result.combustible*@sum + result.tech_sum*@semi*0.5+result.tech_sum*@comb}" %>
       </abbr>
     </td>
     <td data-type='garbage'  data-price="<%= result.garbage_price.to_f %>">
-      <abbr class="hidden-print" title='<%= "(#{result.garbage} x #{@sum})" %>'>
+      <abbr title='<%= "(#{result.garbage} x #{@sum})" %>'>
         <%= "#{result.garbage*@sum}" %>
       </abbr>
     </td>
     <td data-type='umbrella' data-price="<%= result.umbrella_price.to_f %>">
-      <abbr class="hidden-print" title='<%= "(#{result.umbrella} x #{@sum})" %>'>
+      <abbr title='<%= "(#{result.umbrella} x #{@sum})" %>'>
         <%= "#{result.umbrella*@sum}" %>
       </abbr>
     </td>

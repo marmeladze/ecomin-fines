@@ -1,5 +1,6 @@
 module Admin
   class TreesController < BaseController
+    before_action :logged_in_user
     before_action :set_tree, only: [:show, :edit, :update, :destroy]
 
     def index

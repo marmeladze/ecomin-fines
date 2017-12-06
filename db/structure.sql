@@ -318,6 +318,62 @@ ALTER SEQUENCE regions_id_seq OWNED BY regions.id;
 
 
 --
+-- Name: reports; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE reports (
+    id integer NOT NULL,
+    tree_id integer,
+    classification_id integer,
+    region_id integer,
+    forestry_id integer,
+    detour_id integer,
+    quarter_id integer,
+    tariff_id integer,
+    diameter integer,
+    material_count integer,
+    semi_material_count integer,
+    combustible_count integer,
+    material_large_volume numeric(5,3) DEFAULT 0.0,
+    material_mid_volume numeric(5,3) DEFAULT 0.0,
+    material_small_volume numeric(5,3) DEFAULT 0.0,
+    combustible_volume numeric(5,3) DEFAULT 0.0,
+    garbage_volume numeric(5,3) DEFAULT 0.0,
+    umbrella_volume numeric(5,3) DEFAULT 0.0,
+    material_large_price numeric(5,2) DEFAULT 0.0,
+    material_mid_price numeric(5,2) DEFAULT 0.0,
+    material_small_price numeric(5,3) DEFAULT 0.0,
+    combustible_price numeric(5,3) DEFAULT 0.0,
+    garbage_price numeric(5,3) DEFAULT 0.0,
+    umbrella_price numeric(5,3) DEFAULT 0.0,
+    user_id integer,
+    verbatim character varying,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: reports_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE reports_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: reports_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE reports_id_seq OWNED BY reports.id;
+
+
+--
 -- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -440,9 +496,9 @@ CREATE TABLE users (
     last_name character varying,
     email character varying,
     password_digest character varying,
-    deleted boolean,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    deleted boolean DEFAULT false
 );
 
 
@@ -520,6 +576,13 @@ ALTER TABLE ONLY quarters ALTER COLUMN id SET DEFAULT nextval('quarters_id_seq':
 --
 
 ALTER TABLE ONLY regions ALTER COLUMN id SET DEFAULT nextval('regions_id_seq'::regclass);
+
+
+--
+-- Name: reports id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY reports ALTER COLUMN id SET DEFAULT nextval('reports_id_seq'::regclass);
 
 
 --
@@ -605,6 +668,14 @@ ALTER TABLE ONLY quarters
 
 ALTER TABLE ONLY regions
     ADD CONSTRAINT regions_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: reports reports_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY reports
+    ADD CONSTRAINT reports_pkey PRIMARY KEY (id);
 
 
 --
@@ -695,6 +766,62 @@ CREATE INDEX index_quarters_on_detour_id ON quarters USING btree (detour_id);
 
 
 --
+-- Name: index_reports_on_classification_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_reports_on_classification_id ON reports USING btree (classification_id);
+
+
+--
+-- Name: index_reports_on_detour_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_reports_on_detour_id ON reports USING btree (detour_id);
+
+
+--
+-- Name: index_reports_on_forestry_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_reports_on_forestry_id ON reports USING btree (forestry_id);
+
+
+--
+-- Name: index_reports_on_quarter_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_reports_on_quarter_id ON reports USING btree (quarter_id);
+
+
+--
+-- Name: index_reports_on_region_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_reports_on_region_id ON reports USING btree (region_id);
+
+
+--
+-- Name: index_reports_on_tariff_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_reports_on_tariff_id ON reports USING btree (tariff_id);
+
+
+--
+-- Name: index_reports_on_tree_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_reports_on_tree_id ON reports USING btree (tree_id);
+
+
+--
+-- Name: index_reports_on_user_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_reports_on_user_id ON reports USING btree (user_id);
+
+
+--
 -- Name: index_users_on_email; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -725,11 +852,51 @@ ALTER TABLE ONLY material_volumes
 
 
 --
+-- Name: reports fk_rails_346ee1561c; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY reports
+    ADD CONSTRAINT fk_rails_346ee1561c FOREIGN KEY (region_id) REFERENCES regions(id);
+
+
+--
+-- Name: reports fk_rails_3ea264fed8; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY reports
+    ADD CONSTRAINT fk_rails_3ea264fed8 FOREIGN KEY (detour_id) REFERENCES detours(id);
+
+
+--
+-- Name: reports fk_rails_45f21ffa46; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY reports
+    ADD CONSTRAINT fk_rails_45f21ffa46 FOREIGN KEY (forestry_id) REFERENCES forestries(id);
+
+
+--
+-- Name: reports fk_rails_4d3c12c92a; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY reports
+    ADD CONSTRAINT fk_rails_4d3c12c92a FOREIGN KEY (quarter_id) REFERENCES quarters(id);
+
+
+--
 -- Name: height_ranges fk_rails_4e97d4c24c; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY height_ranges
     ADD CONSTRAINT fk_rails_4e97d4c24c FOREIGN KEY (classification_id) REFERENCES classifications(id);
+
+
+--
+-- Name: reports fk_rails_557560b62e; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY reports
+    ADD CONSTRAINT fk_rails_557560b62e FOREIGN KEY (tariff_id) REFERENCES tariffs(id);
 
 
 --
@@ -757,6 +924,22 @@ ALTER TABLE ONLY detours
 
 
 --
+-- Name: reports fk_rails_ba266b8108; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY reports
+    ADD CONSTRAINT fk_rails_ba266b8108 FOREIGN KEY (classification_id) REFERENCES classifications(id);
+
+
+--
+-- Name: reports fk_rails_c7699d537d; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY reports
+    ADD CONSTRAINT fk_rails_c7699d537d FOREIGN KEY (user_id) REFERENCES users(id);
+
+
+--
 -- Name: quarters fk_rails_c9209bd54c; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -770,6 +953,14 @@ ALTER TABLE ONLY quarters
 
 ALTER TABLE ONLY forestries
     ADD CONSTRAINT fk_rails_e472ea8693 FOREIGN KEY (region_id) REFERENCES regions(id);
+
+
+--
+-- Name: reports fk_rails_eef933989f; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY reports
+    ADD CONSTRAINT fk_rails_eef933989f FOREIGN KEY (tree_id) REFERENCES trees(id);
 
 
 --
@@ -817,4 +1008,8 @@ INSERT INTO schema_migrations (version) VALUES ('20171113095158');
 INSERT INTO schema_migrations (version) VALUES ('20171205132252');
 
 INSERT INTO schema_migrations (version) VALUES ('20171205132355');
+
+INSERT INTO schema_migrations (version) VALUES ('20171205182627');
+
+INSERT INTO schema_migrations (version) VALUES ('20171205183204');
 

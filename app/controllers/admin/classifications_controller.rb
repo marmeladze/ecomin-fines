@@ -1,5 +1,6 @@
 module Admin
   class ClassificationsController < BaseController
+    before_action :logged_in_user
     before_action :set_classification, only: [:show, :edit, :update, :destroy]
 
     # GET /classifications

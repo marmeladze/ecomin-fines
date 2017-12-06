@@ -114,5 +114,52 @@ window.onload = function() {
 }
 
 function printPage() {
-   window.print();
+    window.print();
+}
+
+function makeJSONFromRowData(row){
+  return {
+    classification_id: getParameterByName('classification_id'),
+    region_id: getParameterByName('region'),
+    forestry_id: getParameterByName('forestry'),
+    detour_id: getParameterByName('detour'),
+    quarter_id: getParameterByName('quarter'),
+    tree_id: row.cells[0].dataset.treePk,
+
+    diameter: row.cells[1].innerText,
+
+    material_count: row.cells[2].innerText,
+    semi_material_count: row.cells[3].innerText,
+    combustible_count: row.cells[4].innerText,
+
+    material_large_volume: row.cells[6].innerText,
+    material_large_price: row.cells[6].dataset.price,
+
+    material_mid_volume: row.cells[7].innerText,
+    material_mid_price: row.cells[7].dataset.price,
+
+    material_small_volume: row.cells[8].innerText,
+    material_small_price: row.cells[8].dataset.price,
+
+    material_combustible_volume: row.cells[10].innerText,
+    material_combustible_price: row.cells[10].dataset.price,
+
+    material_garbage_volume: row.cells[11].innerText,
+    material_garbage_price: row.cells[11].dataset.price,
+
+    material_umbrella_volume: row.cells[12].innerText,
+    material_umbrella_price: row.cells[12].dataset.price,
+  }
+}
+
+function getDataFromSearchTable() {
+  var rows = Array.from(document.querySelector('tbody').rows);
+
+  rows.forEach(function(row) {
+      var rowObj = makeJSONFromRowData(row);
+
+
+
+
+  });
 }

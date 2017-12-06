@@ -1,5 +1,6 @@
 module Admin
   class RegionsController < BaseController
+    before_action :logged_in_user
     before_action :set_region, only: [:show, :edit, :update, :destroy]
 
     # GET /regions
