@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
   
+
+
+  resources :statistics, only: [:index, :show], param: :slug
+
   get '/admin' => 'admin/base#index'
   get '/load_forestries' => 'admin/base#load_forestries'
   get '/search' => 'admin/base#search'

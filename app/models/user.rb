@@ -2,6 +2,8 @@ class User < ActiveRecord::Base
   before_save { self.email = email.downcase }
   validates :email, uniqueness: true
   
+  has_many :reports
+
   scope :living, -> { where(deleted: false) }
 
   has_secure_password
