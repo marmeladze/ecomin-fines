@@ -1,0 +1,22 @@
+<div class="col-md-9">
+  <div class="panel panel-default">
+    <div class="panel-heading">Rayonlara görə qırıntıların ümumi həcmi (m<sup>3</sup> ilə)</div>
+    <div class="panel-body">
+      <%= bar_chart @regional %>
+    </div>
+  </div>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">Qırıntı həcmlərinin ağaclara görə bölgüsü (m<sup>3</sup> ilə)</div>
+    <div class="panel-body">
+      <%= pie_chart @trees %>
+    </div>
+  </div>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">Qırıntı həcmlərinin cari aya görə bölgüsü (m<sup>3</sup> ilə)</div>
+    <div class="panel-body">
+      <%= line_chart @this_month %>
+    </div>
+  </div>
+</div>

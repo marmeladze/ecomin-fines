@@ -1,16 +1,8 @@
-<h3>Rayonlara görə qırıntıların ümumi həcmi (m<sup>3</sup> ilə)</h3>
-
-<%= bar_chart @regional %>
-
-<hr>
-
-<h3>Qırıntı həcmlərinin ağaclara görə bölgüsü (m<sup>3</sup> ilə)</h3>
-
-<%= pie_chart @trees %>
-
-<hr>
-
-<h3>Qırıntı həcmlərinin cari aya görə bölgüsü (m<sup>3</sup> ilə)</h3>
-
-<%= line_chart @this_month %>
-
+<div class="row">
+	<div class="col-md-3">
+	  <%= render 'partials/regions' %>
+	</div>
+	<div class="col-md-9">
+	  <%= render 'partials/total' %>
+	</div>
+</div>

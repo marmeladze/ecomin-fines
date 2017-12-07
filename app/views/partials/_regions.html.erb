@@ -1,0 +1,10 @@
+<div class="panel panel-default">
+  <div class="panel-heading">Rayonlar üzrə</div>
+  <div class="panel-body">
+    <ul>
+      <% @partial_regions.each do |region| %>
+        <li><%= link_to region.name, statistic_path(region.slug) %></li>
+      <% end %>
+    </ul>
+  </div>
+</div>

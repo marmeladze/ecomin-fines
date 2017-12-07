@@ -30,6 +30,46 @@ COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
 
 SET search_path = public, pg_catalog;
 
+--
+-- Name: median(anyarray); Type: FUNCTION; Schema: public; Owner: -
+--
+
+CREATE FUNCTION median(anyarray) RETURNS double precision
+    LANGUAGE sql IMMUTABLE
+    AS $_$
+        WITH q AS
+        (
+           SELECT val
+           FROM unnest($1) val
+           WHERE VAL IS NOT NULL
+           ORDER BY 1
+        ),
+        cnt AS
+        (
+          SELECT COUNT(*) AS c FROM q
+        )
+        SELECT AVG(val)::float8
+        FROM
+        (
+          SELECT val FROM q
+          LIMIT  2 - MOD((SELECT c FROM cnt), 2)
+          OFFSET GREATEST(CEIL((SELECT c FROM cnt) / 2.0) - 1,0)
+        ) q2;
+      $_$;
+
+
+--
+-- Name: median(anyelement); Type: AGGREGATE; Schema: public; Owner: -
+--
+
+CREATE AGGREGATE median(anyelement) (
+    SFUNC = array_append,
+    STYPE = anyarray,
+    INITCOND = '{}',
+    FINALFUNC = public.median
+);
+
+
 SET default_tablespace = '';
 
 SET default_with_oids = false;
@@ -293,7 +333,8 @@ CREATE TABLE regions (
     name character varying,
     description text,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    slug character varying
 );
 
 
@@ -1012,4 +1053,8 @@ INSERT INTO schema_migrations (version) VALUES ('20171205132355');
 INSERT INTO schema_migrations (version) VALUES ('20171205182627');
 
 INSERT INTO schema_migrations (version) VALUES ('20171205183204');
+
+INSERT INTO schema_migrations (version) VALUES ('20171207134431');
+
+INSERT INTO schema_migrations (version) VALUES ('20171207164004');
 

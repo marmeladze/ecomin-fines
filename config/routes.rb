@@ -3,8 +3,11 @@ Rails.application.routes.draw do
 
   root 'statistics#index'
   
-  resources :statistics, only: [:index, :show], param: :slug
-
+  resources :statistics, only: [:index, :show], param: :slug, path: 'rayonlara-gore-statistikalar'
+  
+  get 'statistics', to: redirect('rayonlara-gore-statistikalar')
+  get 'statistics/:slug', to: redirect('/rayonlara-gore-statistikalar/%{slug}')
+  
   get '/admin' => 'admin/base#index'
   get '/load_forestries' => 'admin/base#load_forestries'
   get '/search' => 'admin/base#search'
