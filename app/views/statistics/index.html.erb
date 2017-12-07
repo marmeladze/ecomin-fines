@@ -1,16 +1,16 @@
-<legend>Rayonlara görə qırıntıların ümumi həcmi (m<sup>3</sup> ilə)</legend>
+<h3>Rayonlara görə qırıntıların ümumi həcmi (m<sup>3</sup> ilə)</h3>
 
 <%= bar_chart @regional %>
 
 <hr>
 
-<legend>Qırıntı həcmlərinin ağaclara görə bölgüsü (m<sup>3</sup> ilə)</legend>
+<h3>Qırıntı həcmlərinin ağaclara görə bölgüsü (m<sup>3</sup> ilə)</h3>
 
 <%= pie_chart @trees %>
 
 <hr>
 
-<legend>Qırıntı həcmlərinin cari aya görə bölgüsü (m<sup>3</sup> ilə)</legend>
+<h3>Qırıntı həcmlərinin cari aya görə bölgüsü (m<sup>3</sup> ilə)</h3>
 
-<%= area_chart @this_month %>
+<%= line_chart @this_month %>
 
