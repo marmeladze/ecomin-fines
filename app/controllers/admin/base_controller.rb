@@ -20,6 +20,12 @@ module Admin
       end
     end
 
+    def load_report
+      @report_rows  = Report.where(verbatim: params[:verbatim])
+      @general = @report_rows.first
+      render 'reports'
+    end
+
     def create_report
       report = Report.new report_params 
       verbatim = [
@@ -33,7 +39,7 @@ module Admin
       ].push(Date.today.to_s).join("-")
       report.verbatim = Digest::MD5.hexdigest(verbatim)
       if report.save
-        render plain: "Report created"
+        render plain: "Report created. Follow #{load_report_url(verbatim: report.verbatim)} "
       else
         render plain: "Error while creating report entity"
       end

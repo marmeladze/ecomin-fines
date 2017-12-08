@@ -8,11 +8,12 @@ Rails.application.routes.draw do
   get 'statistics', to: redirect('rayonlara-gore-statistikalar')
   get 'statistics/:slug', to: redirect('/rayonlara-gore-statistikalar/%{slug}')
   
-  get '/admin' => 'admin/base#index'
-  get '/load_forestries' => 'admin/base#load_forestries'
-  get '/search' => 'admin/base#search'
+  get 'admin' => 'admin/base#index'
+  get 'load_forestries' => 'admin/base#load_forestries'
+  get 'search' => 'admin/base#search'
 
-  post '/create-report' => 'admin/base#create_report'
+  post 'create-report' => 'admin/base#create_report'
+  get  'load-report/:verbatim' => 'admin/base#load_report', as: :load_report
 
   get '/login' => 'sessions#new'
   post '/login' => 'sessions#create'
