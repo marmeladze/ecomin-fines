@@ -13,7 +13,7 @@
     <div class="row">
       <div class="col-md-12">
         <div class="navbar navbar-default navbar-fixed-top">
-          <div class="container">
+          <div class="container-fluid">
             <nav class="navbar-collapse collapse">
               <ul class="nav navbar-nav">
                 <li><%= link_to "Axtarış", admin_path %></li>                
@@ -25,8 +25,8 @@
                 <li><%= link_to "İşlək material həcmləri", admin_material_volumes_path %></li>
                 <li><%= link_to "Cərimə əmsalları", admin_compensation_rates_path %></li>
                 <li><%= link_to "Ağac hündürlükləri", admin_height_ranges_path %></li>
+                <li><%= link_to current_user.full_name, my_reports_url %></li>
                 <li><%= link_to "Çıxış", logout_path, method: :delete %></li>
-                <li><%= link_to current_user.full_name, "#" %></li>
               </ul>
             </nav>
           </div>

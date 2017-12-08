@@ -14,6 +14,7 @@ Rails.application.routes.draw do
 
   post 'create-report' => 'admin/base#create_report'
   get  'load-report/:verbatim' => 'admin/base#load_report', as: :load_report
+  get  'my-reports' => 'admin/base#my_reports', as: :my_reports
 
   get '/login' => 'sessions#new'
   post '/login' => 'sessions#create'

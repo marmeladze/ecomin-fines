@@ -1,0 +1,78 @@
+<div class="well">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <%= report_header @general.region.name, @general.forestry.name, @general.detour.name_on_report, @general.quarter.name_on_report %>
+    </div>
+  </div>
+</div>
+
+<table data-user-id="<%= session[:user_id] %>" class="table table-condensed table-bordered table-hover">
+  <thead>
+    <tr>
+      <th rowspan="3">Ağac</th>
+      <th rowspan="3"> Diametr</th>
+      <th colspan="4">Texniki yararlılığına görə sayı, həcmlə</th>
+      <th colspan="8">HƏCMİ , m<sup>3</sup></th>
+    </tr>    
+    <tr>
+      <th rowspan="2">İşlik</th>    
+      <th rowspan="2">Yarım işlik</th>
+      <th rowspan="2">Odunluq</th>
+      <th rowspan="2">Cəmi</th>
+      <th colspan="4">İşlik</th>
+      <th rowspan="2">Odun</th>
+      <th rowspan="2">Şax, çırpı</th>
+      <th rowspan="2">Çətirdən odun</th>
+      <th rowspan="2">Cəmi</th>
+    </tr>
+    <tr>
+      <th>İri</th>
+      <th>Orta</th>
+      <th>Xırda</th>
+      <th>Cəmi</th>     
+    </tr>
+  </thead>
+  <tbody>
+    <% @report_rows.each do |result| %>
+      <tr data-rep-id="<%= result.id %>">
+        <th><%= result.tree.name %></th>
+        <td><%= result.diameter %></td>
+        <td><%= result.material_count %></td>
+        <td><%= result.semi_material_count %></td>
+        <td><%= result.combustible_count %></td>
+        <td><%= "#{result.technical_material_counts_sum}" %></td>
+        <td data-type='large'  data-price="<%= result.material_large_price.to_f %>">
+          <%= result.material_large_volume %>
+        </td>
+        <td  data-type='mid' data-price="<%= result.material_mid_price.to_f %>">
+          <%= result.material_mid_volume  %>
+        </td>
+        <td data-type='small'  data-price="<%= result.material_small_price.to_f %>">
+          <%= result.material_small_volume %>
+        </td>
+        <td> 
+          <%= result.total_material_parts_volume %>
+        </td>
+        <td data-type='combustible' data-price="<%= result.combustible_price.to_f %>">
+          <%= result.combustible_volume %>
+        </td>
+        <td data-type='garbage'  data-price="<%= result.garbage_price.to_f %>">
+          <%= result.garbage_volume %>
+        </td>
+        <td data-type='umbrella' data-price="<%= result.umbrella_price.to_f %>">
+          <%= result.umbrella_volume %>
+        </td>
+        <td>
+          <%= result.overall_volume %>
+        </td>
+      </tr>
+    <% end %>
+    <tr>
+      <td colspan="6"></td>
+      <td colspan="6" id="total-sum"></td>
+    </tr>
+
+
+  </tbody>
+
+</table>

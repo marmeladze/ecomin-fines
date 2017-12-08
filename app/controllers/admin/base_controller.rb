@@ -12,6 +12,11 @@ module Admin
       @tariffs = Tariff.pluck(:name, :id)
     end
 
+    def my_reports
+      @verbatims = @current_user.reports.pluck(:verbatim).uniq
+      render 'reports'
+    end
+
     def load_forestries 
       region_id = params[:region_id] || Region.first
       @forestries = Forestry.where(region_id: region_id).pluck(:name, :id)
@@ -23,7 +28,7 @@ module Admin
     def load_report
       @report_rows  = Report.where(verbatim: params[:verbatim])
       @general = @report_rows.first
-      render 'reports'
+      render 'report'
     end
 
     def create_report
