@@ -44,7 +44,7 @@ module Admin
       ].push(Date.today.to_s).join("-")
       report.verbatim = Digest::MD5.hexdigest(verbatim)
       if report.save
-        render plain: "Report created. Follow #{load_report_url(verbatim: report.verbatim)} "
+        render plain: "Cədvəl tərtib olundu.  <a href=#{load_report_url(verbatim: report.verbatim)}>Keçid</a> "
       else
         render plain: "Error while creating report entity"
       end
