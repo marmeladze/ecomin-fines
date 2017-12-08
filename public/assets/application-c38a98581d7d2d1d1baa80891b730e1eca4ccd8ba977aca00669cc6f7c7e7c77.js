@@ -11658,43 +11658,44 @@ window.onload = function() {
    });  
   }
 
-  if (window.location.pathname == '/search') {
+  if (window.location.pathname == '/search' || window.location.pathname.startsWith('/load-report')) {
     calculateSums();
   }
 
-  document.getElementById('inline-form-submit').addEventListener('click', function(e){
-    e.preventDefault();
+  if(window.location.pathname == '/search'){
+    document.getElementById('inline-form-submit').addEventListener('click', function(e){
+      e.preventDefault();
 
-    qs = {
-      classification_id: getParameterByName('classification_id'),
-      tariff_id: getParameterByName('tariff_id'),
-      tree_id: document.getElementById('inline-remote-form-tree-id').value,
-      diameter: document.getElementById('inline-remote-form-tree-diameter').value,
-      material: document.getElementById('inline-remote-form-tree-material').value,
-      semi_material: document.getElementById('inline-remote-form-tree-semi-material').value,
-      combustible: document.getElementById('inline-remote-form-tree-combustible').value
-    }
-
-    var url = '/search?' + serialize(qs);
-
-    var xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function(){
-      if (this.readyState == 4 && this.status == 200) {
-        var tbl_body =  document.querySelector('tbody');
-        tbl_body.innerHTML += xhr.response;
-        calculateSums();
+      qs = {
+        classification_id: getParameterByName('classification_id'),
+        tariff_id: getParameterByName('tariff_id'),
+        tree_id: document.getElementById('inline-remote-form-tree-id').value,
+        diameter: document.getElementById('inline-remote-form-tree-diameter').value,
+        material: document.getElementById('inline-remote-form-tree-material').value,
+        semi_material: document.getElementById('inline-remote-form-tree-semi-material').value,
+        combustible: document.getElementById('inline-remote-form-tree-combustible').value
       }
-    }
-    xhr.open('GET', url, true);
-    xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
-    xhr.send();
-  });
 
-  document.getElementById('make-report').addEventListener('click', function(e){
-    e.preventDefault();
-    getDataFromSearchTable();
-  });
+      var url = '/search?' + serialize(qs);
 
+      var xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function(){
+        if (this.readyState == 4 && this.status == 200) {
+          var tbl_body =  document.querySelector('tbody');
+          tbl_body.innerHTML += xhr.response;
+          calculateSums();
+        }
+      }
+      xhr.open('GET', url, true);
+      xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+      xhr.send();
+    });
+  
+    document.getElementById('make-report').addEventListener('click', function(e){
+      e.preventDefault();
+      getDataFromSearchTable();
+    });
+  }
 }
 
 function printPage() {
@@ -11751,7 +11752,7 @@ function getDataFromSearchTable() {
 
     xhr.onreadystatechange = function(){
       if (this.readyState == 4 && this.status == 200) {
-        alert(xhr.responseText);
+        document.querySelector('.result-page-buttons').innerHTML = xhr.responseText;
       }
     }
     xhr.open('POST', url, true);
