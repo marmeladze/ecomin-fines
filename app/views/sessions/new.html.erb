@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-6 col-md-offset-3">
+    <div class="col-md-5 col-md-offset-2">
       <%= form_for(:session, url: login_path) do |f| %>
 
         <%= f.label :email %>
@@ -10,6 +10,14 @@
         <%= f.password_field :password, class: 'form-control' %>
 
         <%= f.submit "Log in", class: "btn btn-primary" %>
+      <% end %>
+    </div>
+    <div class="col-md-5">
+      <p>Test girişlər</p>
+      <% User.living.each do |user| %>
+        <hr />
+        <p><strong>İstifadəçi adı</strong>: <%= user.email %></p>
+        <p><strong>Parol</strong>: geometry123</p>
       <% end %>
     </div>
   </div>
