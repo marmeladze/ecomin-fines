@@ -1,2 +1,2 @@
 
-http://ecology-fines.herokuapp.com/admin [ziya.bayramov.1@yandex.com / geometry123]
+http://ecology-fines.herokuapp.com/admin [ziya.bayramov.1@yandex.com / password]
